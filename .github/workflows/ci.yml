@@ -14,32 +14,39 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 1. Build the self-contained image.
-      # This handles data generation, model training, and registration internally on Linux.
       - name: Build Docker image
         run: docker build -t loan-default-api .
 
-      # 2. Run the newly compiled serving layer in the background
       - name: Run container
         run: docker run -d -p 8000:8000 --name ml-api loan-default-api
 
-      # 3. Give the containerized FastAPI server a moment to spin up
       - name: Wait for container to start
         run: sleep 5
 
-      # 4. Validate the serving health endpoint
       - name: Test health endpoint
         run: |
           curl --retry 3 --retry-delay 2 --fail http://localhost:8000/health
 
-      # 5. Query the FastAPI prediction endpoint with sample JSON
       - name: Test predict endpoint
         run: |
           curl --fail -X POST http://localhost:8000/predict \
             -H "Content-Type: application/json" \
             -d '{"credit_score": 700, "annual_income": 65000, "loan_amount": 20000, "debt_to_income": 18.5, "employment_length": 5, "home_ownership": "MORTGAGE", "loan_purpose": "debt_consolidation", "interest_rate": 12.0, "open_accounts": 10, "delinquencies_2yr": 0}'
 
-      # 6. Always clean up running processes, regardless of test pass/fail
+      # This step will ONLY run if any of the above steps (like the curl tests) fail.
+      - name: Dump Container Debug Information
+        if: failure()
+        run: |
+          echo "=========================================="
+          echo "          CONTAINER RUNTIME STATUS        "
+          echo "=========================================="
+          docker ps -a
+
+          echo "=========================================="
+          echo "          CONTAINER ENGINE LOGS           "
+          echo "=========================================="
+          docker logs ml-api
+
       - name: Stop container
         if: always()
         run: docker stop ml-api
