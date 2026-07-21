@@ -1,0 +1,36 @@
+artifact_path: file:C:/Users/matlo/OneDrive/Documents/loan-default-predictor/mlruns/1/models/m-036f49ed4a304fa28822675e13db54c9/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.13.14
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.0
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.14.0
+model_id: m-036f49ed4a304fa28822675e13db54c9
+model_size_bytes: 26789019
+model_uuid: m-036f49ed4a304fa28822675e13db54c9
+prompts: null
+run_id: e9346dbc063449a28db4c04f3a41a445
+signature:
+  inputs: '[{"type": "long", "name": "credit_score", "required": true}, {"type": "double",
+    "name": "annual_income", "required": true}, {"type": "double", "name": "loan_amount",
+    "required": true}, {"type": "double", "name": "debt_to_income", "required": true},
+    {"type": "long", "name": "employment_length", "required": true}, {"type": "string",
+    "name": "home_ownership", "required": true}, {"type": "string", "name": "loan_purpose",
+    "required": true}, {"type": "double", "name": "interest_rate", "required": true},
+    {"type": "long", "name": "open_accounts", "required": true}, {"type": "long",
+    "name": "delinquencies_2yr", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-07-21 09:52:18.919582'

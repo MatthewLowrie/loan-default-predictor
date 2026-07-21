@@ -156,6 +156,7 @@ def generate_loan_data(n_samples=10000, random_state=42):
 
 if __name__ == "__main__":
     
+    
     """
     
     The if __name__ == "__main__" block runs only when you execute the file directly. It creates the data directory, generates 10,000 loan records, saves them to data/loans.csv, and prints summary statistics so you can confirm it worked.

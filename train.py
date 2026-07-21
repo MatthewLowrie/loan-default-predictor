@@ -26,7 +26,7 @@ def load_data():
     df = pd.read_csv("data/loans.csv")
     X = df.drop("loan_default", axis=1)
     y = df["loan_default"]
-    return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y) # stratify=y ensures the train/test split maintains the same default rate as the original dataset, which is important for imbalanced classification tasks.
 
 
 def build_preprocessor():
@@ -137,7 +137,7 @@ def main():
     This forces the model to actually learn what defaults look like, even though they are the minority class.
     
     """ 
-    mlflow.set_experiment("loan-default-prediction")
+    mlflow.set_experiment("loan-default-prediction") # This creates an experiment and allows us to remember information about the run such as the model type, hyperparameters, and evaluation metrics. You can view all runs in the MLflow UI.
 
     X_train, X_test, y_train, y_test = load_data()
 
