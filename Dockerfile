@@ -1,5 +1,8 @@
 FROM python:3.13-slim
 
+# Force stdin, stdout, and stderr to be unbuffered
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
 # 1. Install dependencies first (takes advantage of Docker's layer caching)
