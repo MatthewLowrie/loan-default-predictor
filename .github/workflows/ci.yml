@@ -21,7 +21,7 @@ jobs:
         run: docker run -d -p 8000:8000 --name ml-api loan-default-api
 
       - name: Wait for container to start
-        run: sleep 5
+        run: sleep 20
 
       - name: Test health endpoint
         run: |
