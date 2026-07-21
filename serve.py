@@ -95,3 +95,6 @@ def predict(application: LoanApplication):
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+    
+    # uvicorn serve:app --reload
